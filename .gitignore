@@ -2,6 +2,7 @@
 .edge-*/
 cloudflared.exe
 *.zip
+!研途-双端安装包.zip
 *.apk
 !downloads/Yantu-1.0.0.apk
 *.keystore
