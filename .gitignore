@@ -1,0 +1,22 @@
+# Local preview and packaging output
+.edge-*/
+cloudflared.exe
+*.zip
+*.apk
+!downloads/Yantu-1.0.0.apk
+*.keystore
+.android-build/
+android/.build/
+release/
+github-token.txt
+.ssh/
+
+# Editor and operating-system files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Logs
+*.log
+npm-debug.log*

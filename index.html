@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta
+      name="description"
+      content="研途是一款为考研人设计的每日学习打卡与复习记录应用。"
+    />
+    <meta name="theme-color" content="#f4f0e7" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="研途" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>研途 · 考研学习打卡</title>
+  </head>
+  <body>
+    <svg class="svg-sprite" aria-hidden="true">
+      <symbol id="icon-home" viewBox="0 0 24 24">
+        <path d="M3.5 10.8 12 3.7l8.5 7.1v8.4a1.8 1.8 0 0 1-1.8 1.8H5.3a1.8 1.8 0 0 1-1.8-1.8v-8.4Z" />
+        <path d="M9.2 21v-6.3h5.6V21" />
+      </symbol>
+      <symbol id="icon-book" viewBox="0 0 24 24">
+        <path d="M4 5.6c2.9-.8 5.6-.3 8 1.4v13c-2.4-1.7-5.1-2.2-8-1.4v-13Z" />
+        <path d="M20 5.6c-2.9-.8-5.6-.3-8 1.4v13c2.4-1.7 5.1-2.2 8-1.4v-13Z" />
+      </symbol>
+      <symbol id="icon-school" viewBox="0 0 24 24">
+        <path d="m3 9 9-4 9 4-9 4-9-4Z" />
+        <path d="M7 11.2V16c2.8 2 7.2 2 10 0v-4.8M21 9v6" />
+        <path d="M12 13v4.2" />
+      </symbol>
+      <symbol id="icon-chart" viewBox="0 0 24 24">
+        <path d="M4 19.5V13h4v6.5M10 19.5V5h4v14.5M16 19.5V9h4v10.5" />
+        <path d="M2.8 19.5h18.4" />
+      </symbol>
+      <symbol id="icon-user" viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="3.6" />
+        <path d="M4.8 20.3c.6-4 3-6 7.2-6s6.6 2 7.2 6" />
+      </symbol>
+      <symbol id="icon-plus" viewBox="0 0 24 24">
+        <path d="M12 5v14M5 12h14" />
+      </symbol>
+      <symbol id="icon-arrow" viewBox="0 0 24 24">
+        <path d="m9 5 7 7-7 7" />
+      </symbol>
+      <symbol id="icon-calendar" viewBox="0 0 24 24">
+        <rect x="3.5" y="5.5" width="17" height="15" rx="2.3" />
+        <path d="M7.5 3.5v4M16.5 3.5v4M3.5 10h17" />
+      </symbol>
+      <symbol id="icon-clock" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="8.6" />
+        <path d="M12 7v5.4l3.4 2" />
+      </symbol>
+      <symbol id="icon-flame" viewBox="0 0 24 24">
+        <path d="M13.2 3.4c.5 3-1.2 4.2-2.4 5.5-1.2 1.4-2.1 2.7-1.6 4.7.6 2.2 2.1 3.5 4.1 3.5 2.4 0 4.2-1.8 4.2-4.7 0-2.6-1.4-4.1-2.5-5.7-.6-.9-1.1-2-1.8-3.3Z" />
+        <path d="M10.9 20.9c-3.3-.3-5.5-2.2-5.5-5.3 0-2.1 1.2-3.4 2.4-4.4" />
+      </symbol>
+      <symbol id="icon-settings" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="3.2" />
+        <path d="M19.2 13.6a7.8 7.8 0 0 0 0-3.2l2-1.5-2-3.4-2.3 1a8 8 0 0 0-2.8-1.6L13.8 2h-3.6l-.3 2.9a8 8 0 0 0-2.8 1.6l-2.3-1-2 3.4 2 1.5a7.8 7.8 0 0 0 0 3.2l-2 1.5 2 3.4 2.3-1a8 8 0 0 0 2.8 1.6l.3 2.9h3.6l.3-2.9a8 8 0 0 0 2.8-1.6l2.3 1 2-3.4-2-1.5Z" />
+      </symbol>
+      <symbol id="icon-pause" viewBox="0 0 24 24">
+        <path d="M8 5v14M16 5v14" />
+      </symbol>
+      <symbol id="icon-play" viewBox="0 0 24 24">
+        <path d="m8 5 11 7-11 7V5Z" />
+      </symbol>
+      <symbol id="icon-close" viewBox="0 0 24 24">
+        <path d="m5 5 14 14M19 5 5 19" />
+      </symbol>
+      <symbol id="icon-edit" viewBox="0 0 24 24">
+        <path d="m14.5 5.5 4 4M4 20l1-5.2L16.8 3a1.5 1.5 0 0 1 2.1 0l1.1 1.1a1.5 1.5 0 0 1 0 2.1L8.9 17.5 4 20Z" />
+      </symbol>
+      <symbol id="icon-trash" viewBox="0 0 24 24">
+        <path d="M4.5 7h15M9 7V4.5h6V7M7 7l.8 13h8.4L17 7M10 10.5v6M14 10.5v6" />
+      </symbol>
+      <symbol id="icon-download" viewBox="0 0 24 24">
+        <path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4 20.5h16" />
+      </symbol>
+      <symbol id="icon-upload" viewBox="0 0 24 24">
+        <path d="M12 16V4m0 0 4.5 4.5M12 4 7.5 8.5M4 20.5h16" />
+      </symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24">
+        <path d="m4.5 12.5 4.7 4.7L19.5 6.8" />
+      </symbol>
+      <symbol id="icon-chevron-left" viewBox="0 0 24 24">
+        <path d="m15 5-7 7 7 7" />
+      </symbol>
+      <symbol id="icon-sparkle" viewBox="0 0 24 24">
+        <path d="M12 2.5c.7 5.5 3.9 8.7 9.5 9.5-5.6.8-8.8 4-9.5 9.5-.7-5.5-3.9-8.7-9.5-9.5 5.6-.8 8.8-4 9.5-9.5Z" />
+      </symbol>
+    </svg>
+
+    <section class="welcome-screen" id="welcomeScreen" aria-hidden="true" aria-labelledby="welcomeHeadline" hidden>
+      <div class="welcome-decoration ring-one"></div>
+      <div class="welcome-decoration ring-two"></div>
+      <div class="welcome-inner">
+        <div class="welcome-brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 40 40" aria-hidden="true">
+              <path d="M7 28.5c6.4 0 9.6-4.8 12-11.4C20.6 13.5 22.7 9 26.8 9c2.3 0 4.1 1.5 4.1 3.8 0 4.8-5.3 8.2-14.2 8.6" />
+              <path d="M8.5 33C14.7 29.9 20 24.8 22.7 18.6" />
+            </svg>
+          </span>
+          <span>
+            <strong>研途</strong>
+            <small>YANTU · 每一步都算数</small>
+          </span>
+        </div>
+
+        <div class="welcome-copy">
+          <p class="welcome-date" id="welcomeDate">11 月 6 日 · 星期五</p>
+          <span class="welcome-target">
+            <svg><use href="#icon-school"></use></svg>
+            <span id="welcomeTarget">等待你写下目标院校</span>
+          </span>
+          <h1 id="welcomeHeadline">今天再向前一点，<br /><em>未来就会清晰一点。</em></h1>
+          <p class="welcome-quote" id="welcomeQuote">把今天的专注，写给未来。</p>
+        </div>
+
+        <div class="welcome-footer">
+          <button class="welcome-enter" id="enterApp" type="button">
+            开始今天的学习
+            <svg><use href="#icon-arrow"></use></svg>
+          </button>
+          <span>不必着急，稳稳向前就好</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#" aria-label="研途首页">
+          <span class="brand-mark">
+            <svg viewBox="0 0 40 40" aria-hidden="true">
+              <path d="M7 28.5c6.4 0 9.6-4.8 12-11.4C20.6 13.5 22.7 9 26.8 9c2.3 0 4.1 1.5 4.1 3.8 0 4.8-5.3 8.2-14.2 8.6" />
+              <path d="M8.5 33C14.7 29.9 20 24.8 22.7 18.6" />
+            </svg>
+          </span>
+          <span>
+            <strong>研途</strong>
+            <small>YANTU · 每一步都算数</small>
+          </span>
+        </a>
+
+        <nav class="side-nav" aria-label="主导航">
+          <button class="nav-item active" type="button" data-view="today">
+            <svg><use href="#icon-home"></use></svg>
+            <span>今日</span>
+          </button>
+          <button class="nav-item" type="button" data-view="records">
+            <svg><use href="#icon-book"></use></svg>
+            <span>复习记录</span>
+          </button>
+          <button class="nav-item" type="button" data-view="stats">
+            <svg><use href="#icon-chart"></use></svg>
+            <span>学习统计</span>
+          </button>
+          <button class="nav-item" type="button" data-view="settings">
+            <svg><use href="#icon-user"></use></svg>
+            <span>我的</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-note">
+          <svg><use href="#icon-sparkle"></use></svg>
+          <p id="sidebarQuote">慢慢来，比较快。</p>
+          <span>今日也请稳稳向前</span>
+        </div>
+      </aside>
+
+      <main class="app-main">
+        <section class="view active" id="view-today" aria-labelledby="todayTitle">
+          <header class="topbar">
+            <div>
+              <p class="eyebrow" id="todayDate">11 月 6 日 · 星期五</p>
+              <h1 id="todayTitle">晚上好，<span id="greetName">同学</span></h1>
+            </div>
+            <button class="avatar-button" id="profileShortcut" type="button" aria-label="打开个人设置">
+              <span id="avatarLetter">研</span>
+            </button>
+          </header>
+
+          <article class="dream-card">
+            <div class="dream-card-shape"></div>
+            <div class="dream-card-head">
+              <span class="card-kicker"><svg><use href="#icon-school"></use></svg> MY DREAM SCHOOL</span>
+              <button class="dream-edit" id="editTargetButton" type="button">
+                <svg><use href="#icon-edit"></use></svg>
+                编辑目标
+              </button>
+            </div>
+            <div class="dream-card-main">
+              <div class="dream-copy">
+                <p><span id="targetYearBadge">2027</span> · 目标院校</p>
+                <h2 id="targetSchoolName">设置你的目标院校</h2>
+                <p class="school-encouragement" id="schoolEncouragement">
+                  写下心之所向，让今天每一次努力都有方向。
+                </p>
+              </div>
+              <div class="target-total-score">
+                <span>目标总分</span>
+                <div><strong id="targetTotalScore">--</strong><small>分</small></div>
+              </div>
+            </div>
+            <div class="subject-targets" id="subjectTargets">
+              <div><span>政治</span><strong data-target-subject="政治">--</strong></div>
+              <div><span>英语</span><strong data-target-subject="英语">--</strong></div>
+              <div><span>数学</span><strong data-target-subject="数学">--</strong></div>
+              <div><span>专业课</span><strong data-target-subject="专业课">--</strong></div>
+            </div>
+          </article>
+
+          <div class="today-layout">
+            <article class="exam-card">
+              <div class="exam-card-glow"></div>
+              <div class="exam-card-top">
+                <span class="card-label"><i></i> 考研倒计时</span>
+                <button class="icon-button light" id="openExamSettings" type="button" aria-label="设置考研目标">
+                  <svg><use href="#icon-settings"></use></svg>
+                </button>
+              </div>
+              <div class="exam-card-main">
+                <div>
+                  <p><span id="examYear">2027</span> 考研</p>
+                  <div class="countdown">
+                    <strong id="daysLeft">--</strong>
+                    <span>天</span>
+                  </div>
+                </div>
+                <div class="exam-date-block">
+                  <span>目标考试日</span>
+                  <strong id="examDateLabel">2026.12.19</strong>
+                  <small id="examDateHint">按预计日期计算</small>
+                </div>
+              </div>
+              <div class="exam-progress">
+                <div class="exam-progress-label">
+                  <span>备考进度</span>
+                  <span id="examProgressText">还在起点，也在路上</span>
+                </div>
+                <div class="progress-track"><i id="examProgressBar"></i></div>
+              </div>
+              <svg class="exam-line-art" viewBox="0 0 180 130" aria-hidden="true">
+                <path d="M2 118c25-30 35-37 57-22 17 11 26-45 45-49 21-5 26 38 43 22 9-9 17-29 31-34" />
+                <circle cx="104" cy="47" r="4" />
+                <path d="M98 83c7-8 14-17 18-28" />
+              </svg>
+            </article>
+
+            <article class="focus-card">
+              <div class="focus-card-head">
+                <div>
+                  <span class="card-kicker">今日专注</span>
+                  <h2 id="todayDuration">0 分钟</h2>
+                  <p id="goalMessage">今天还没有开始，先学 25 分钟吧</p>
+                </div>
+                <div class="progress-ring" id="goalRing" style="--progress: 0">
+                  <div>
+                    <strong id="goalPercent">0%</strong>
+                    <span>目标</span>
+                  </div>
+                </div>
+              </div>
+              <div class="focus-actions">
+                <button class="primary-button" id="startFocusButton" type="button">
+                  <svg><use href="#icon-play"></use></svg>
+                  <span>开始学习</span>
+                </button>
+                <button class="quiet-button" id="quickRecordButton" type="button">
+                  <svg><use href="#icon-plus"></use></svg>
+                  补记学习
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <div class="mini-stats">
+            <article>
+              <span class="mini-icon coral"><svg><use href="#icon-flame"></use></svg></span>
+              <div><strong id="streakStat">0</strong><span>连续打卡 / 天</span></div>
+            </article>
+            <article>
+              <span class="mini-icon sage"><svg><use href="#icon-clock"></use></svg></span>
+              <div><strong id="totalHoursStat">0</strong><span>累计学习 / 小时</span></div>
+            </article>
+            <article>
+              <span class="mini-icon gold"><svg><use href="#icon-book"></use></svg></span>
+              <div><strong id="checkinStat">0</strong><span>学习记录 / 次</span></div>
+            </article>
+          </div>
+
+          <div class="content-grid">
+            <article class="panel week-panel">
+              <div class="panel-head">
+                <div>
+                  <span class="card-kicker">这一周</span>
+                  <h2>保持自己的节奏</h2>
+                </div>
+                <button class="text-button" type="button" data-go-view="stats">
+                  查看统计 <svg><use href="#icon-arrow"></use></svg>
+                </button>
+              </div>
+              <div class="week-strip" id="weekStrip"></div>
+            </article>
+
+            <article class="panel review-panel">
+              <div class="panel-head">
+                <div>
+                  <span class="card-kicker">今日复习</span>
+                  <h2>今天学到了什么？</h2>
+                </div>
+                <button class="circle-add" id="addTodayRecord" type="button" aria-label="添加今日记录">
+                  <svg><use href="#icon-plus"></use></svg>
+                </button>
+              </div>
+              <div class="today-records" id="todayRecords"></div>
+            </article>
+          </div>
+
+          <article class="daily-note">
+            <span>今日一句</span>
+            <p id="dailyQuote"></p>
+            <i></i>
+          </article>
+        </section>
+
+        <section class="view" id="view-records" aria-labelledby="recordsTitle">
+          <header class="page-header">
+            <div>
+              <p class="eyebrow">REVIEW NOTES</p>
+              <h1 id="recordsTitle">复习记录</h1>
+              <p>把走过的每一步，都留在这里。</p>
+            </div>
+            <button class="primary-button compact" id="addPastRecord" type="button">
+              <svg><use href="#icon-plus"></use></svg> 记一笔
+            </button>
+          </header>
+
+          <div class="records-layout">
+            <article class="panel calendar-panel">
+              <div class="calendar-head">
+                <button class="icon-button" id="prevMonth" type="button" aria-label="上个月">
+                  <svg><use href="#icon-chevron-left"></use></svg>
+                </button>
+                <strong id="calendarMonth">2026 年 11 月</strong>
+                <button class="icon-button flip" id="nextMonth" type="button" aria-label="下个月">
+                  <svg><use href="#icon-chevron-left"></use></svg>
+                </button>
+              </div>
+              <div class="calendar-weekdays" aria-hidden="true">
+                <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span>
+              </div>
+              <div class="calendar-grid" id="calendarGrid"></div>
+              <div class="calendar-legend">
+                <span><i></i> 有学习记录</span>
+                <span><b></b> 今天</span>
+              </div>
+            </article>
+
+            <article class="panel records-panel">
+              <div class="records-toolbar">
+                <div>
+                  <span class="card-kicker">学习足迹</span>
+                  <h2 id="recordsHeading">全部记录</h2>
+                </div>
+                <label class="select-wrap">
+                  <span class="sr-only">按科目筛选</span>
+                  <select id="subjectFilter">
+                    <option value="all">全部科目</option>
+                    <option value="政治">政治</option>
+                    <option value="英语">英语</option>
+                    <option value="数学">数学</option>
+                    <option value="专业课">专业课</option>
+                    <option value="其他">其他</option>
+                  </select>
+                </label>
+              </div>
+              <div id="recordsList" class="records-list"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" id="view-stats" aria-labelledby="statsTitle">
+          <header class="page-header">
+            <div>
+              <p class="eyebrow">YOUR PROGRESS</p>
+              <h1 id="statsTitle">学习统计</h1>
+              <p>看见积累，也看见自己的成长轨迹。</p>
+            </div>
+            <div class="date-chip">
+              <svg><use href="#icon-calendar"></use></svg>
+              最近 7 天
+            </div>
+          </header>
+
+          <div class="stats-summary">
+            <article class="stat-tile warm">
+              <span>近 7 天学习</span>
+              <strong id="weekHoursStat">0<small>h</small></strong>
+              <p id="weekCompare">本周的数据会出现在这里</p>
+            </article>
+            <article class="stat-tile">
+              <span>累计打卡</span>
+              <strong id="allDaysStat">0<small>天</small></strong>
+              <p>每一个开始都值得记录</p>
+            </article>
+            <article class="stat-tile">
+              <span>最高连续</span>
+              <strong id="bestStreakStat">0<small>天</small></strong>
+              <p>专注正在成为习惯</p>
+            </article>
+          </div>
+
+          <div class="stats-grid">
+            <article class="panel chart-panel">
+              <div class="panel-head">
+                <div>
+                  <span class="card-kicker">学习时长</span>
+                  <h2>最近 7 天</h2>
+                </div>
+                <span class="chart-unit">单位：小时</span>
+              </div>
+              <div class="bar-chart" id="barChart"></div>
+            </article>
+
+            <article class="panel subject-panel">
+              <div class="panel-head">
+                <div>
+                  <span class="card-kicker">科目分布</span>
+                  <h2>时间花在哪里</h2>
+                </div>
+              </div>
+              <div class="subject-chart-wrap">
+                <div class="donut" id="subjectDonut">
+                  <div>
+                    <strong id="donutTotal">0h</strong>
+                    <span>总时长</span>
+                  </div>
+                </div>
+                <div class="subject-legend" id="subjectLegend"></div>
+              </div>
+            </article>
+          </div>
+
+          <article class="insight-card">
+            <span class="insight-icon"><svg><use href="#icon-sparkle"></use></svg></span>
+            <div>
+              <span>研途小结</span>
+              <h2 id="insightTitle">从今天的 25 分钟开始</h2>
+              <p id="insightText">学习不是一场冲刺，而是一段每天向前一点的旅程。</p>
+            </div>
+            <button class="quiet-button on-dark" id="statsFocusButton" type="button">开始学习</button>
+          </article>
+        </section>
+
+        <section class="view" id="view-settings" aria-labelledby="settingsTitle">
+          <header class="page-header">
+            <div>
+              <p class="eyebrow">MY YANTU</p>
+              <h1 id="settingsTitle">我的研途</h1>
+              <p>设置你的目标，让每天的努力有方向。</p>
+            </div>
+          </header>
+
+          <div class="settings-layout">
+            <article class="panel profile-panel">
+              <div class="profile-avatar" id="largeAvatar">研</div>
+              <div>
+                <label for="studentName">你的昵称</label>
+                <input id="studentName" type="text" maxlength="12" placeholder="同学" autocomplete="nickname" />
+                <p>会显示在每日问候里</p>
+              </div>
+            </article>
+
+            <article class="panel settings-panel target-settings-panel" id="targetSettingsPanel">
+              <div class="settings-heading">
+                <span class="mini-icon coral"><svg><use href="#icon-school"></use></svg></span>
+                <div>
+                  <h2>目标院校与分数</h2>
+                  <p>这些目标会显示在首页最醒目的位置</p>
+                </div>
+              </div>
+              <label class="field target-school-field">
+                <span>目标院校</span>
+                <input
+                  id="targetSchoolInput"
+                  type="text"
+                  maxlength="30"
+                  placeholder="例如：复旦大学"
+                  autocomplete="organization"
+                />
+              </label>
+              <div class="target-score-settings">
+                <label class="target-score-field total">
+                  <span>目标总分</span>
+                  <input id="targetTotalScoreInput" type="number" min="0" max="500" inputmode="numeric" placeholder="--" />
+                </label>
+                <label class="target-score-field">
+                  <span>政治</span>
+                  <input type="number" min="0" max="150" inputmode="numeric" placeholder="--" data-subject-score="政治" />
+                </label>
+                <label class="target-score-field">
+                  <span>英语</span>
+                  <input type="number" min="0" max="150" inputmode="numeric" placeholder="--" data-subject-score="英语" />
+                </label>
+                <label class="target-score-field">
+                  <span>数学</span>
+                  <input type="number" min="0" max="150" inputmode="numeric" placeholder="--" data-subject-score="数学" />
+                </label>
+                <label class="target-score-field">
+                  <span>专业课</span>
+                  <input type="number" min="0" max="150" inputmode="numeric" placeholder="--" data-subject-score="专业课" />
+                </label>
+              </div>
+              <p class="storage-note">填写后会立即显示在首页，还可以保存到备份中。</p>
+            </article>
+
+            <article class="panel settings-panel">
+              <div class="settings-heading">
+                <span class="mini-icon coral"><svg><use href="#icon-calendar"></use></svg></span>
+                <div>
+                  <h2>考研目标</h2>
+                  <p>选择报考年份，倒计时会随之更新</p>
+                </div>
+              </div>
+              <div class="setting-block">
+                <label>目标年份</label>
+                <div class="year-options" id="yearOptions"></div>
+              </div>
+              <div class="setting-row">
+                <div>
+                  <label for="examDateInput">考试日期</label>
+                  <p>默认按 12 月第三个周六预估，可按官方通知调整</p>
+                </div>
+                <input id="examDateInput" type="date" />
+              </div>
+            </article>
+
+            <article class="panel settings-panel">
+              <div class="settings-heading">
+                <span class="mini-icon sage"><svg><use href="#icon-clock"></use></svg></span>
+                <div>
+                  <h2>每日学习目标</h2>
+                  <p>适合自己的目标，才更容易坚持</p>
+                </div>
+              </div>
+              <div class="goal-setting">
+                <div class="goal-number"><strong id="goalSettingValue">4</strong><span>小时</span></div>
+                <input id="dailyGoalRange" type="range" min="1" max="12" step="0.5" value="4" aria-label="每日学习目标" />
+                <div class="range-labels"><span>1 小时</span><span>12 小时</span></div>
+              </div>
+            </article>
+
+            <article class="panel settings-panel">
+              <div class="settings-heading">
+                <span class="mini-icon gold"><svg><use href="#icon-download"></use></svg></span>
+                <div>
+                  <h2>数据与备份</h2>
+                  <p>所有数据只保存在当前设备</p>
+                </div>
+              </div>
+              <div class="backup-actions">
+                <button class="outline-button" id="exportButton" type="button">
+                  <svg><use href="#icon-download"></use></svg> 导出备份
+                </button>
+                <button class="outline-button" id="importButton" type="button">
+                  <svg><use href="#icon-upload"></use></svg> 恢复备份
+                </button>
+              </div>
+              <input id="importFile" type="file" accept="application/json,.json" hidden />
+              <p class="storage-note">建议每周导出一次备份，换手机时可恢复全部学习记录。</p>
+            </article>
+
+            <article class="panel settings-panel install-panel">
+              <div class="settings-heading">
+                <span class="mini-icon sage"><svg><use href="#icon-home"></use></svg></span>
+                <div>
+                  <h2>安装到手机桌面</h2>
+                  <p>像普通 App 一样打开，断网也能继续打卡</p>
+                </div>
+              </div>
+              <button class="outline-button install-button" id="installButton" type="button">
+                <svg><use href="#icon-download"></use></svg> 添加到桌面
+              </button>
+              <p class="storage-note">也可以从浏览器菜单选择“添加到主屏幕”。</p>
+            </article>
+
+            <article class="danger-zone">
+              <div>
+                <strong>重新开始</strong>
+                <p>清除全部学习记录与个人设置，操作后无法撤销。</p>
+              </div>
+              <button class="danger-button" id="clearDataButton" type="button">清除数据</button>
+            </article>
+
+            <p class="version-line">研途 YANTU · 离线可用 · v1.0.0</p>
+          </div>
+        </section>
+      </main>
+
+      <nav class="bottom-nav" aria-label="底部导航">
+        <button class="bottom-nav-item active" type="button" data-view="today">
+          <svg><use href="#icon-home"></use></svg><span>今日</span>
+        </button>
+        <button class="bottom-nav-item" type="button" data-view="records">
+          <svg><use href="#icon-book"></use></svg><span>记录</span>
+        </button>
+        <button class="bottom-nav-add" id="bottomNavAdd" type="button" aria-label="添加学习记录">
+          <svg><use href="#icon-plus"></use></svg>
+        </button>
+        <button class="bottom-nav-item" type="button" data-view="stats">
+          <svg><use href="#icon-chart"></use></svg><span>统计</span>
+        </button>
+        <button class="bottom-nav-item" type="button" data-view="settings">
+          <svg><use href="#icon-user"></use></svg><span>我的</span>
+        </button>
+      </nav>
+    </div>
+
+    <section class="timer-screen" id="timerScreen" aria-hidden="true" aria-labelledby="timerTitle">
+      <div class="timer-glow one"></div>
+      <div class="timer-glow two"></div>
+      <header class="timer-topbar">
+        <button class="icon-button light" id="closeTimer" type="button" aria-label="返回">
+          <svg><use href="#icon-close"></use></svg>
+        </button>
+        <span id="timerStatus">准备专注</span>
+        <span class="timer-live-dot"></span>
+      </header>
+      <div class="timer-content">
+        <p class="timer-kicker">FOCUS TIME</p>
+        <h2 id="timerTitle">把这一段时间<br />留给真正的进步</h2>
+        <div class="timer-ring" id="timerRing" style="--progress: 0">
+          <div class="timer-ring-inner">
+            <strong id="timerDisplay">00:00:00</strong>
+            <span id="timerHint">准备好后开始</span>
+          </div>
+        </div>
+        <div class="timer-subjects" id="timerSubjects" aria-label="选择学习科目"></div>
+        <div class="timer-actions">
+          <button class="timer-primary" id="timerToggle" type="button">
+            <svg><use href="#icon-play"></use></svg>
+            <span>开始专注</span>
+          </button>
+          <button class="timer-finish" id="finishTimer" type="button" hidden>结束并打卡</button>
+          <button class="timer-clear" id="clearTimerSegment" type="button" hidden>
+            <svg><use href="#icon-trash"></use></svg>
+            清零本次
+          </button>
+        </div>
+        <p class="timer-tip">屏幕可以熄灭，计时不会停止</p>
+      </div>
+    </section>
+
+    <div class="modal-backdrop" id="recordModal" aria-hidden="true">
+      <section class="modal record-modal" role="dialog" aria-modal="true" aria-labelledby="recordModalTitle">
+        <div class="modal-handle"></div>
+        <header class="modal-head">
+          <div>
+            <span class="card-kicker">DAILY CHECK-IN</span>
+            <h2 id="recordModalTitle">记下今天的进展</h2>
+          </div>
+          <button class="icon-button" id="closeRecordModal" type="button" aria-label="关闭">
+            <svg><use href="#icon-close"></use></svg>
+          </button>
+        </header>
+        <form id="recordForm">
+          <input type="hidden" id="recordId" />
+          <fieldset>
+            <legend>学习科目</legend>
+            <div class="subject-options" id="recordSubjects"></div>
+          </fieldset>
+          <div class="form-grid">
+            <label class="field">
+              <span>学习时长</span>
+              <div class="duration-inputs">
+                <span><input id="durationHours" type="number" min="0" max="24" inputmode="numeric" value="1" /> 小时</span>
+                <span><input id="durationMinutes" type="number" min="0" max="59" inputmode="numeric" value="0" /> 分钟</span>
+              </div>
+            </label>
+            <label class="field">
+              <span>学习日期</span>
+              <input id="recordDate" type="date" required />
+            </label>
+          </div>
+          <label class="field">
+            <span>今天复习了什么？</span>
+            <textarea
+              id="recordContent"
+              rows="4"
+              maxlength="500"
+              required
+              placeholder="例如：高数第三章极限，复习了洛必达法则，整理了 12 道错题……"
+            ></textarea>
+            <small><i id="contentCount">0</i> / 500</small>
+          </label>
+          <fieldset>
+            <legend>今天的状态</legend>
+            <div class="mood-options" id="moodOptions">
+              <button type="button" data-mood="一般">一般</button>
+              <button type="button" data-mood="专注">专注</button>
+              <button type="button" data-mood="高效">高效</button>
+            </div>
+          </fieldset>
+          <div class="modal-actions">
+            <button class="clear-segment-text-button" id="clearTimerSegmentRecord" type="button" hidden>
+              清零本次时长
+            </button>
+            <button class="danger-text-button" id="deleteRecordButton" type="button" hidden>删除此记录</button>
+            <button class="primary-button full" type="submit">
+              <svg><use href="#icon-check"></use></svg>
+              <span>保存学习记录</span>
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <div class="modal-backdrop confirm-backdrop" id="confirmModal" aria-hidden="true">
+      <section class="modal confirm-modal" role="alertdialog" aria-modal="true" aria-labelledby="confirmTitle">
+        <span class="confirm-icon"><svg><use href="#icon-trash"></use></svg></span>
+        <h2 id="confirmTitle">确认清除全部数据？</h2>
+        <p id="confirmText">全部学习记录、目标和设置都会被删除，且无法恢复。</p>
+        <div class="confirm-actions">
+          <button class="outline-button" id="confirmCancel" type="button">取消</button>
+          <button class="danger-button" id="confirmAction" type="button">确认清除</button>
+        </div>
+      </section>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">
+      <svg><use href="#icon-check"></use></svg>
+      <span id="toastText">已保存</span>
+    </div>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>

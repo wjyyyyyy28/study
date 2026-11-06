@@ -1,0 +1,9 @@
+{
+  "name": "yantu-study-checkin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "一款为考研人设计的手机学习打卡 PWA",
+  "scripts": {
+    "start": "node serve.mjs"
+  }
+}
